@@ -20,9 +20,14 @@ export function create(values) {
 export function update(values) {
     return submit(values, 'put');
 }
+
+export function remove(values) {
+    return submit(values, 'delete');
+}
+
 function submit(values, method) {
     return dispatch => {
-        const id = value._id ? values._id : '';
+        const id = values._id ? values._id : '';
         axios[method](`${BASE_URL}/billingCycles/${id}`, values)
             .then(resp => {
                 toastr.success('Sucesso', 'Operação realizada com sucesso!')
@@ -40,6 +45,15 @@ export function showUpdate(billingCycle) {
         initialize('billingCycleForm', billingCycle)
     ]
 }
+
+export function showDelete(billingCycle) {
+    return [
+        showTabs('tabDelete'),
+        selectTab('tabDelete'),
+        initialize('billingCycleForm', billingCycle)
+    ]
+}
+
 
 export function init() {
     return [
